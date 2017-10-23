@@ -1,12 +1,32 @@
 # frozen_string_literal: true
 module Handsaw
   class Processor
-    DEFAULT_FILTERS = [
+    MARKDOWN_RENDERER = Redcarpet::Markdown.new(Handsaw::Markdown, tables: true, disable_indented_code_blocks: true, fenced_code_blocks: true)
+    BEFORE_FILTERS = [
+      Handsaw::Filters::DocParser,
+    ].freeze
+
+    AFTER_FILTERS = [
+      Handsaw::Filters::BrParser,
+      Handsaw::Filters::SpanParser,
+      Handsaw::Filters::LinkParser,
+      Handsaw::Filters::Sanitizer
     ].freeze
 
     attr_accessor :context
+
+    String.class_eval do
+      def m_to_html
+        MARKDOWN_RENDERER.render self
+      end
+    end
     def initialize(**context)
-      @context = context
+      @suffix = self.to_s.match(/(\w+)Processor/).to_a[1]&.underscore
+      @each_filters = Dir.glob('app/processors/' + @suffix + '/*.rb').map do |path|
+      	name = File::basename(path).sub(File::extname(path), '')
+      	Object.const_get "#{@suffix.camelize}::#{name.camelize}"
+      end if @suffix
+      @context = context.merge(suffix: @suffix)
     end
 
     def render(text, **context)
@@ -15,7 +35,7 @@ module Handsaw
     end
 
     def filters
-      @filters ||= DEFAULT_FILTERS
+      @filters ||= BEFORE_FILTERS + @each_filters + AFTER_FILTERS
     end
   end
 end
