@@ -3,7 +3,6 @@ module Handsaw
   module Filters
     class CodeBlock < HTML::Pipeline::Filter
       include ActionView::Helpers
-      include HtmlBuilder
 
       def element_type
         self.class.to_s.split('::').last.underscore

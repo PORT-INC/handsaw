@@ -22,7 +22,7 @@ module Handsaw
       	name = File::basename(path).sub(File::extname(path), '')
       	Object.const_get "#{@suffix.camelize}::#{name.camelize}"
       end if @suffix
-      @context = context.merge(suffix: @suffix, markdown_filter: (context[:markdown_filter] || MARKDOWN_RENDERER))
+      @context = context.merge(suffix: @suffix, markdown_filter: markdown_filter)
     end
 
     def render(text, **context)
@@ -32,6 +32,10 @@ module Handsaw
 
     def filters
       @filters ||= BEFORE_FILTERS + @each_filters + AFTER_FILTERS
+    end
+
+    def markdown_filter
+      MARKDOWN_RENDERER
     end
   end
 end
