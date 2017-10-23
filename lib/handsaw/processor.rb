@@ -1,4 +1,11 @@
 # frozen_string_literal: true
+require 'filters/br_parser'
+require 'filters/doc_parser'
+require 'filters/indented_paragraph'
+require 'filters/link_parser'
+require 'filters/sanitizer'
+require 'filters/span_parser'
+
 module Handsaw
   class Processor
     MARKDOWN_RENDERER = Redcarpet::Markdown.new(Handsaw::Markdown, tables: true, disable_indented_code_blocks: true, fenced_code_blocks: true)
