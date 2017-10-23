@@ -1,6 +1,5 @@
 require 'handsaw/engine'
 require 'handsaw/markdown'
-require 'handsaw/processor'
 
 require 'handsaw/filters/br_parser'
 require 'handsaw/filters/doc_parser'
@@ -9,7 +8,7 @@ require 'handsaw/filters/link_parser'
 require 'handsaw/filters/sanitizer'
 require 'handsaw/filters/span_parser'
 
+require 'handsaw/processor'
+
 module Handsaw
-  HOGE = 'hogehoge'
-  # Your code goes here...
 end

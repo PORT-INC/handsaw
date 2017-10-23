@@ -16,18 +16,13 @@ module Handsaw
 
     attr_accessor :context
 
-    String.class_eval do
-      def m_to_html
-        MARKDOWN_RENDERER.render self
-      end
-    end
     def initialize(**context)
       @suffix = self.to_s.match(/(\w+)Processor/).to_a[1]&.underscore
       @each_filters = Dir.glob('app/processors/' + @suffix + '/*.rb').map do |path|
       	name = File::basename(path).sub(File::extname(path), '')
       	Object.const_get "#{@suffix.camelize}::#{name.camelize}"
       end if @suffix
-      @context = context.merge(suffix: @suffix)
+      @context = context.merge(suffix: @suffix, markdown_filter: (context[:markdown_filter] || MARKDOWN_RENDERER))
     end
 
     def render(text, **context)

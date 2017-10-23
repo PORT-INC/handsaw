@@ -6,7 +6,7 @@ module Handsaw
     class DocParser < HTML::Pipeline::MarkdownFilter
       def call
         Nokogiri::HTML.fragment(
-          @text.gsub(/^[ |　|\t]+$/, '').gsub(/```\S*\n[^`]+```\n/m) { |w| w.m_to_html } # rubocop:disable SymbolProc
+          @text.gsub(/^[ |　|\t]+$/, '').gsub(/```\S*\n[^`]+```\n/m) { |w| @context[:markdown_filter].render(w) } # rubocop:disable SymbolProc
                .split("\n\n").reduce([]) do |html, block|
                  html << parse(block.concat("\nEOS"))
                end.join("\n")
@@ -41,7 +41,7 @@ module Handsaw
             blocks << line.rstrip.match(/^[ ]{#{level}}(.+)$/).to_a[1] unless line =~ /^\s$/ || line == 'EOS'
           end
         end
-        blocks.join("\n").m_to_html.strip
+        @context[:markdown_filter].render(blocks.join("\n")).strip
       end
     end
   end
