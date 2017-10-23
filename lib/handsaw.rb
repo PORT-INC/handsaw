@@ -8,7 +8,7 @@ require 'handsaw/filters/link_parser'
 require 'handsaw/filters/sanitizer'
 require 'handsaw/filters/span_parser'
 
-require 'handsaw/processor'
+require 'handsaw/base_processor'
 
 module Handsaw
 end
