@@ -1,10 +1,4 @@
 # frozen_string_literal: true
-require 'filters/br_parser'
-require 'filters/doc_parser'
-require 'filters/indented_paragraph'
-require 'filters/link_parser'
-require 'filters/sanitizer'
-require 'filters/span_parser'
 
 module Handsaw
   class Processor
