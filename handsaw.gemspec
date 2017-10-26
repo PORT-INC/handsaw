@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "nokogiri"
   s.add_dependency 'redcarpet', '~> 3.3.4'
   s.add_dependency 'html-pipeline', '~> 2.4.2'
+  s.add_dependency 'github-markdown'
 
   s.add_development_dependency "sqlite3"
 end

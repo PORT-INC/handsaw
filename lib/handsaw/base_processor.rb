@@ -4,7 +4,7 @@ module Handsaw
   class BaseProcessor
     MARKDOWN_RENDERER = Redcarpet::Markdown.new(Handsaw::Markdown, tables: true, disable_indented_code_blocks: true, fenced_code_blocks: true)
     BEFORE_FILTERS = [
-      Handsaw::Filters::DocParser,
+      Handsaw::Filters::Analyzer,
     ].freeze
 
     AFTER_FILTERS = [

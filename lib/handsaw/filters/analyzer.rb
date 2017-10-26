@@ -3,7 +3,7 @@ require 'cgi'
 
 module Handsaw
   module Filters
-    class DocParser < HTML::Pipeline::MarkdownFilter
+    class Analyzer < HTML::Pipeline::MarkdownFilter
       def call
         Nokogiri::HTML.fragment(
           @text.gsub(/^[ |　|\t]+$/, '').gsub(/```\S*\n[^`]+```\n/m) { |w| @context[:markdown_filter].render(w) } # rubocop:disable SymbolProc
