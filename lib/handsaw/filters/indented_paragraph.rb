@@ -24,7 +24,7 @@ module Handsaw
               values << item.to_s
             end
           end
-          @value = values.join
+          @value = values.join.gsub(/^\s*$/, '')
           div.replace Nokogiri::HTML.fragment(template)
         end
 
