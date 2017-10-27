@@ -5,7 +5,7 @@ module Handsaw
       include ActionView::Helpers
 
       def element_type
-        self.class.to_s.split('::').last.underscore
+        self.class.to_s.split('::').last.match(/(\w+)Filter/).to_a[1]&.underscore
       end
 
       def call
