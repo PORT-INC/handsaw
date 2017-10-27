@@ -1,14 +1,19 @@
 # Handsaw
-Short description and motivation.
+Handsaw is a new lightweight markup language made in Ruby, and has the following features.
 
-## Usage
-How to use my plugin.
+* Its syntax is affected by markdown and slim.
+* Implemented in Ruby.
+* Easy to define your own notation.
+
+You can check basic conversion rules on the demo site below.
+
+[Handsaw-Demo](https://ancient-anchorage-59376.herokuapp.com/)
 
 ## Installation
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'handsaw'
+gem 'handsaw', github: 'PORT-INC/handsaw'
 ```
 
 And then execute:
@@ -16,10 +21,22 @@ And then execute:
 $ bundle
 ```
 
-Or install it yourself as:
-```bash
-$ gem install handsaw
+# Usage
+
+## Summary
+
+### 1. Define the `processor` to convert your DSL
+
+Define your own processor to convert the DSL under `app/processors`.
+Your processor has to inherit `Handsaw::BaseProcessor` and its class name must be in the format `XXXXProcessor`.
+
+#### exsample
+
+```rb:app/processors/article_processor.rb
+class ArticleProcessor < Handsaw::BaseProcessor
+end
 ```
+
 
 ## Contributing
 Contribution directions go here.
