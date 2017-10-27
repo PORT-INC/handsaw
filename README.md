@@ -30,13 +30,44 @@ $ bundle
 Define your own processor to convert the DSL under `app/processors`.
 Your processor has to inherit `Handsaw::BaseProcessor` and its class name must be in the format `XXXXProcessor`.
 
-#### exsample
+#### example
 
 ```rb:app/processors/article_processor.rb
 class ArticleProcessor < Handsaw::BaseProcessor
 end
 ```
 
+### 2. Convert DSL using your defined `processor`
+
+```rb
+processor = ArticleProcessor.new
+
+text =<<EOS
+checkpoint:
+  title:
+    TITLE
+  message:
+    MESSAGE
+
+{red: decorated_text}
+
+[blue: decorated_link_label](link)
+EOS
+
+processor.render text
+```
+
+```html
+<div class="pa-checkBox" style="">
+  <div class="pa-checkBox__content">
+    <div class="title"><p class="pa-text">TITLE</p></div>
+    <div class="message"><p class="pa-text">MESSAGE</p></div>
+  </div>
+</div>
+
+<p class="pa-text"><span class="red">decorated_text</span></p>
+<p class="pa-text"><a href="link" class="blue">decorated_link_label</a></p>
+```
 
 ## Contributing
 Contribution directions go here.
