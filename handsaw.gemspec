@@ -21,6 +21,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'redcarpet', '~> 3.3.4'
   s.add_dependency 'html-pipeline', '~> 2.4.2'
   s.add_dependency 'github-markdown'
+  s.add_dependency "slim-rails"
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "pry-rails"
+  s.add_development_dependency "pry-byebug"
 end
