@@ -33,7 +33,7 @@ module Handsaw
       end
 
       def template
-        open("app/processors/#{@context[:suffix]}/templates/#{@type}.html.erb") do |f|
+        open("app/processors/#{@context[:prefix]}/templates/#{@type}.html.erb") do |f|
           ERB.new(f.read).result(binding)
         end
       end
