@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'erb'
+require 'tilt'
 
 module Handsaw
   module Filters
@@ -33,9 +34,9 @@ module Handsaw
       end
 
       def template
-        open("app/processors/#{@context[:prefix]}/templates/#{@type}.html.erb") do |f|
-          ERB.new(f.read).result(binding)
-        end
+        template_file_name = Dir.glob("app/processors/#{@context[:prefix]}/templates/#{@type}.*")[0]
+        template = Tilt.new(template_file_name)
+        template.render(self)
       end
 
       def define_variable(item)
