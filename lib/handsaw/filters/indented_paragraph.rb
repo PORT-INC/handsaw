@@ -6,6 +6,7 @@ module Handsaw
   module Filters
     class IndentedParagraph < HTML::Pipeline::Filter
       include ActionView::Helpers
+      include ActionView::Context
 
       def element_type
         self.class.to_s.split('::').last.match(/(\w+)Filter/).to_a[1]&.underscore
@@ -26,11 +27,15 @@ module Handsaw
             end
           end
           @value = values.join.gsub(/^\s*$/, '')
-          div.replace Nokogiri::HTML.fragment(template)
+          div.replace Nokogiri::HTML.fragment(compile)
         end
 
         (instance_variables - variables).each { |v| remove_instance_variable v }
         doc
+      end
+
+      def compile
+        template
       end
 
       def template
