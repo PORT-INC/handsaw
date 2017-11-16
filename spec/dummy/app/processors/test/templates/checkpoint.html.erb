@@ -1,0 +1,8 @@
+<div class="pa-checkBox" style="<%= "float:#{@float};"if @float%><%= "width:#{@width}%;"if @width%>">
+  <% if @title %>
+    <h3 class="pa-checkBox__heading"><%= @title %></h3>
+  <% end %>
+  <div class="pa-checkBox__content">
+    <%= @value %>
+  </div>
+</div>

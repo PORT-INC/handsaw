@@ -27,7 +27,7 @@ module Handsaw
             end
           end
           @value = values.join.gsub(/^\s*$/, '')
-          div.replace Nokogiri::HTML.fragment(compile)
+          div.replace Nokogiri::HTML.fragment(CGI.unescapeHTML(compile))
         end
 
         (instance_variables - variables).each { |v| remove_instance_variable v }
