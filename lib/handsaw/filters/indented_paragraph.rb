@@ -34,7 +34,7 @@ module Handsaw
       end
 
       def template
-        template_file_name = Dir.glob("app/processors/#{@context[:suffix]}/templates/#{@type}.*")[0]
+        template_file_name = Dir.glob("app/processors/#{@context[:prefix]}/templates/#{@type}.*")[0]
         template = Tilt.new(template_file_name)
         template.render(self)
       end

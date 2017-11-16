@@ -17,12 +17,12 @@ module Handsaw
     attr_accessor :context
 
     def initialize(**context)
-      @suffix = self.to_s.match(/(\w+)Processor/).to_a[1]&.underscore
-      @each_filters = Dir.glob('app/processors/' + @suffix + '/*.rb').map do |path|
+      @prefix = context[:prefix] || self.to_s.match(/(\w+)Processor/).to_a[1]&.underscore
+      @each_filters = Dir.glob('app/processors/' + @prefix.to_s + '/*.rb').map do |path|
       	name = File::basename(path).sub(File::extname(path), '')
-      	Object.const_get "#{@suffix.camelize}::#{name.camelize}"
-      end if @suffix
-      @context = context.merge(suffix: @suffix, markdown_filter: markdown_filter)
+      	Object.const_get "#{@prefix.to_s.camelize}::#{name.camelize}"
+      end if @prefix
+      @context = context.merge(prefix: @prefix.to_s, markdown_filter: markdown_filter)
     end
 
     def render(text, **context)
