@@ -1,3 +1,3 @@
 module Handsaw
-  VERSION = '0.2.2.0'
+  VERSION = '0.2.4'
 end
