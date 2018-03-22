@@ -35,7 +35,7 @@ module Handsaw
       end
 
       def compile
-        template
+        template.to_str
       end
 
       def template
