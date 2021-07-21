@@ -4,7 +4,7 @@ module Handsaw
     class BrParser < HTML::Pipeline::Filter
       def call
         doc.search('.//text()').each do |t|
-          t.replace t.text.gsub(/\{br\}/, '') if t.text !~ /\A\s+\z/
+          t.replace t.text.gsub(/\{br\}/, '') if t.text !~ /\A\s+\z/ && t.text.match?(/br/)
         end
         doc
       end

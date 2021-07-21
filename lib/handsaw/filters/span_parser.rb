@@ -6,8 +6,8 @@ module Handsaw
       def call
         doc.search('.//text()').each do |t|
           if t.text !~ /\A\s+\z/
-            t.replace t.text.gsub(SPAN_REG, '<span class="\1">\2</span>')
-            t.replace t.text.gsub(/^{br}.*/, '')
+            t.replace t.text.gsub(SPAN_REG, '<span class="\1">\2</span>') if t.text.match?(SPAN_REG)
+            t.replace t.text.gsub(/^{br}.*/, '') if t.text.match?(/^{br}.*/)
           end
         end
         doc
