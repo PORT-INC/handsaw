@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails"
   s.add_dependency "nokogiri"
-  s.add_dependency 'redcarpet', '~> 3.3.4'
+  s.add_dependency 'redcarpet', '>= 3.3.4'
   s.add_dependency 'html-pipeline', '~> 2.4.2'
   s.add_dependency 'github-markdown'
   s.add_dependency "slim-rails"
